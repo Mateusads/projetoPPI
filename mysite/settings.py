@@ -25,7 +25,7 @@ SECRET_KEY = 'ogid2-^m3etvq)xpj+_ldoc3v^6g05(22=8q$y5azaz*%3vaso'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-LLOWED_HOSTS = ['127.0.0.1', '.pythonanywhere.com']
+LLOWED_HOSTS = ['127.0.0.1', 'mateusads2.pythonanywhere.com/']
 
 
 # Application definition
