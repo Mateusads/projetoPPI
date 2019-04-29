@@ -29,13 +29,12 @@
 	<div id="menu">
 		<ul>
 			<li class="current_page_item">
-				<a href="/blog">Inicio</a></li>
-			<li><a href="/blog/new"> Novo Post</a></li>
-            <li><a href="/detail">Detalhe</a></li> 
-            {% if user.is_authenticated %}
-            <li><a href="/blog">Editar</a></li> 
+				<a href="{% url 'blog:post_list' %}">Inicio</a></li>			
+			{% if user.is_authenticated %}
+			<li><a href="{% url 'blog:post_new' %}"> Novo Post</a></li>
+            <li><a href="#">Editar</a></li> 
             {% endif %}  
-			<li><a href="/blog/contato">Contato</a></li>
+			<li><a href="{% url 'blog:contato' %}">Contato</a></li>
 		</ul>
 	</div>
     <!-- end #menu -->

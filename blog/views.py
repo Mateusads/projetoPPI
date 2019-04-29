@@ -16,9 +16,9 @@ def post_detail(request, pk):
     return render(request, 'blog/post_detail.html', {'post': post})
 
 def post_new(request):
-    if not (request.user.is_authenticated()):
-         return redirect('post_list')
-         # raise Http404("Pagina Nao Existe")
+    # if not (request.user.is_authenticated()):
+    #      return redirect('post_list')
+    #      # raise Http404("Pagina Nao Existe")
 
     if request.method == "POST":
         form = PostForm(request.POST)
@@ -27,7 +27,7 @@ def post_new(request):
             post.author = request.user
             post.published_date = timezone.now()
             post.save()
-            return redirect('post_detail', pk=post.pk)
+            return redirect('blog:post_detail', pk=post.pk)
     else:
         form = PostForm()
     return render(request, 'blog/post_new.html', {'form': form})

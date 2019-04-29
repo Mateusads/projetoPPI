@@ -66,8 +66,8 @@ class Rent(models.Model):
     observacao = models.CharField(max_length = 50, default="")
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
     livro = models.ForeignKey(Livro, on_delete=models.CASCADE)
-    data_rent = models.DateField(default=timezone.now())
-    data_devolucao = models.DateField(default=timezone.now())
+    data_rent = models.DateField()
+    data_devolucao = models.DateField()
 
     def salvar(self):
         self.save()
