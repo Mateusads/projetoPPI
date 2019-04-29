@@ -25,7 +25,7 @@ SECRET_KEY = 'ogid2-^m3etvq)xpj+_ldoc3v^6g05(22=8q$y5azaz*%3vaso'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-LLOWED_HOSTS = ['127.0.0.1', 'mateusads2.pythonanywhere.com/']
+ALLOWED_HOSTS = ['127.0.0.1', 'mateusfgf.pythonanywhere.com/']
 
 
 # Application definition
@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'library',
+    'web',
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +127,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = 'media'
+
+LOGIN_URL = '/login/'

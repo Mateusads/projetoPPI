@@ -1,13 +1,17 @@
-{% load static %}
+{% extends 'library/base.html' %}
+
+{% block content %}
 
 
-<link rel="stylesheet" type="text/css" href="{% static 'library/style.css' %}" />
-{% if latest_question_list %}
-    <ul>
-    {% for question in latest_question_list %}
-    <li><a href="{% url 'library:detail' question.id %}">{{ question.question_text }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+    {% if latest_question_list %}
+        <ul>
+        {% for question in latest_question_list %}
+        <li><a href="{% url 'library:detail' question.id %}">{{ question.question_text }}</a></li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No polls are available.</p>
+    {% endif %}
+
+
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'web/base.html' %}
+
+{% block content %}
+
+    {% for livro in livros %}
+        <div>
+            
+            <h1><a href="{% url 'web:descricao' pk=livro.pk   %}">{{ livro.titulo }}</a></h1>
+            {% if livro.picture %}
+            <img src = {{ livro.picture.url }} height="150"/>
+        {% endif %}
+            <h4>{{ livro.autor }}</h4>
+
+        </div>
+    {% endfor %}
+
+
+
+
+{% endblock %}
+
+

@@ -16,10 +16,17 @@ Including another URLconf
 
 from django.urls import path, include
 from django.contrib import admin
+from django.conf.urls.static import static
+
+from django.conf import settings
+
 
 app_name = 'library'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('library.urls')),
-]
+    path('polls', include('library.urls')),
+    path('blog', include('blog.urls')),
+    path('', include('web.urls' , namespace='web')),
+
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
