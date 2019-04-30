@@ -32,7 +32,7 @@
 				<a href="{% url 'blog:post_list' %}">Inicio</a></li>			
 			{% if user.is_authenticated %}
 			<li><a href="{% url 'blog:post_new' %}"> Novo Post</a></li>
-            <li><a href="#">Editar</a></li> 
+            <li><a href="{% url 'blog:post_list' %}">Editar</a></li> 
             {% endif %}  
 			<li><a href="{% url 'blog:contato' %}">Contato</a></li>
 		</ul>
