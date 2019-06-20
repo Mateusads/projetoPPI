@@ -1,0 +1,25 @@
+{% extends 'web/base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<h1>REGISTER</h1>
+<div class="jumbotron bg-dark mb-4">
+    <table>
+        <tr>
+
+            <form method="post mb-4">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Sign up</button>
+              </form>
+
+            </td>
+        </tr>
+
+    </table>
+</div>
+
+{% endblock %}
+
+

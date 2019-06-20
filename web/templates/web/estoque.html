@@ -1,17 +1,27 @@
 {% extends 'web/base.html' %}
 
 {% block content %}
-
+<div class="container">
+  <div class="card-deck m-3">
     {% for livro in livros %}
-        <div>
-            
-            <h1><a href="{% url 'web:descricao' pk=livro.pk   %}">{{ livro.titulo }}</a></h1>
-
+    <div class="card-column">
+      <div class="card bg-dark mb-4" style="max-width: 319px;">
+        <div class="card-body text-center">
+          {% if livro.picture %}
+          <img src={{ livro.picture.url }} height="160" /><br>
+          {% endif %}
+          <span class="badge badge-light">{{ livro.titulo | slice:"0:25" }}</span>
+          <h5>{{ livro.autor }}</h5>
+          <h6>Vendido: {{ livro.venda }}</h6>
+          <br>
+            <h6>{{livro.sinopse | slice:"0:100" }}</h6>
+          <a href="{% url 'web:descricao' pk=livro.pk  %}" class="btn btn-dark">Ver Mais</a>
         </div>
+      </div>
+    </div>
     {% endfor %}
-
-
-
+  </div>
+</div>
 
 {% endblock %}
 

@@ -11,16 +11,14 @@ class Livro(models.Model):
     ano = models.DateTimeField('ano de publicacao')
 
     BOOK_CHOICES = (
-        ('Drama', 'Drama'),
-        ('Ficcao', 'Ficcao'),
-        ('Ação', 'Ação'),
-        ('Romance', 'Romance'),
-        ('Cronica', 'Crônica' ),
-        ('Poesia ', 'Poesia '),
-        ('Aventura', 'Aventura'),  
-        ('Infantil', 'Infantil'),
-
-
+        ('1', 'Ação'),
+        ('2', 'Aventura'),
+        ('3', 'Crônica' ), 
+        ('4', 'Drama'),
+        ('5', 'Ficcao'),
+        ('6', 'Infantil'),          
+        ('7 ', 'Poesia '),    
+        ('8', 'Romance'),     
     )
     genero = models.CharField(max_length = 100, choices = BOOK_CHOICES)
     

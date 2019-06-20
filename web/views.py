@@ -1,9 +1,10 @@
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.contrib.auth.decorators import login_required
-from .forms import RentForm
+from .forms import RentForm, UserRegisterForm
+from django.contrib.auth.forms import UserCreationForm
 
 from .models import Livro, Cliente, Rent
 
@@ -13,10 +14,11 @@ def index(request):
     return render(request, 'web/index.html', {'livros': livros})
 
 
-def estoque_livro(request):
+def mais_vendido(request):
     livros = Livro.objects.order_by('-venda')
+    
+
     return render(request, 'web/estoque.html', {'livros': livros})
-    # return render(request, 'web/base.html')
 
 
 def descricao(request, pk):
@@ -30,6 +32,13 @@ def lancamento_livro(request):
 
 def biblioteca_livro(request):
     return render(request, 'web/biblioteca.html')
+
+def genero_livro(request, pk):
+    # id = Livro.objects.get(pk=pk)
+   
+    livros = Livro.objects.filter(genero=pk)
+
+    return render(request, 'web/genero.html', {'livros': livros})
 
 
 
@@ -49,7 +58,10 @@ def carrinho_livro(request, pk):
      return render(request, 'web/carrinho.html', {'form': form, 'cliente': cliente, 'livro': livro })        
 
 
-
+class SignUp(generic.CreateView):
+    form_class = UserRegisterForm
+    success_url = reverse_lazy('login')
+    template_name = 'registration/signup.html'
 
 
 

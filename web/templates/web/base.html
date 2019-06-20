@@ -1,71 +1,128 @@
 {% load static %}
 
-<!DOCTYPE HTML><html lang=”pt-br”>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>WEB LIBRARY</title>
-<link href="http://fonts.googleapis.com/css?family=Abel" rel="stylesheet" type="text/css" />
-<link href="style.css" rel="stylesheet" type="text/css" media="screen" />
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-<link rel="stylesheet" href="{% static 'css/gallery.css' %}">
-<style type="text/css">
-/* @import "gallery.css"; */
-
-
-</style>
+	<title>Web Library</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/gallery.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min' %}">
 </head>
-<body>
-<div id="wrapper">
-	<div id="header">
-		<div id="logo">
-			<h1><a href="#">WEB LIBRARY</a></h1>
-		</div>
-	</div>
-	<!-- end #header -->
-	<div id="menu">
-		<ul>
-			<li class="current_page_item">
-				<a href="{% url 'web:index' %}">Inicio</a></li>
-			<li><a href="{% url 'web:estoque_livro' %}"> Mais Vendidos</a></li>
-			<li><a href="{% url 'web:lancamento_livro' %}">Lançamentos</a></li> 
-			<li><a href="{% url 'web:biblioteca_livro' %}">Biblioteca</a></li>
-		</ul>
-	</div>
-    <!-- end #menu -->
-    
-	{% block content %}
-	
-    {% endblock %}
 
-				<!-- <div id="sidebar">
-					<ul>
-						<li>
-							<h2>Blogroll</h2>
-							<ul>
-								<li><a href="#">Aliquam libero</a></li>
-								<li><a href="#">Consectetuer adipiscing elit</a></li>
-								<li><a href="#">Metus aliquam pellentesque</a></li>
-								<li><a href="#">Suspendisse iaculis mauris</a></li>
-								<li><a href="#">Urnanet non molestie semper</a></li>
-								<li><a href="#">Proin gravida orci porttitor</a></li>
-							</ul>
-						</li>
-					</ul>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<img src="https://images.vexels.com/media/users/3/157346/isolated/preview/25829f6b8d6ca72aee817a8448ab7024---cone-de-livro-aberto-plana-by-vexels.png"
+			alt="logo" style="width:40px;">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+			aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="container-fluid ml-4">
+		<div class="collapse navbar-collapse" id="navbarColor02">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active">
+					<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'web:mais_vendido' %}">Mais Vendidos</a>
+				</li>
+
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+						Genero
+					</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="{% url 'web:genero_livro' pk=1  %}">Ação</a>
+						<a class="dropdown-item" href="{% url 'web:genero_livro' pk=2  %}">Aventura</a>
+						<a class="dropdown-item" href="{% url 'web:genero_livro' pk=3  %}">Crônica</a>
+						<a class="dropdown-item" href="{% url 'web:genero_livro' pk=4  %}">Drama</a>
+						<a class="dropdown-item" href="{% url 'web:genero_livro' pk=5  %}">Ficcao</a>
+						<a class="dropdown-item" href="{% url 'web:genero_livro' pk=6  %}">Infantil</a>
+						<a class="dropdown-item" href="{% url 'web:genero_livro' pk=7  %}">Poesia</a>
+						<a class="dropdown-item" href="{% url 'web:genero_livro' pk=8  %}">Romance</a>
+
+					</div>
+				</li>
+			</ul>
+			<li class="nav-item my-2 my-lg-0">
+
+				{% if user.is_authenticated %}
+			<li class="nav-item dropdown">
+				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+					{{ user.get_username }}
+				</a>
+				<div class="dropdown-menu">
+					<a class="dropdown-item" href="{% url 'web:genero_livro' pk=1  %}">Perfil</a>
+					<a class="dropdown-item" href="{% url 'logout' %}">Encerrar Sessão</a>
+					<a class="dropdown-item" href="">Alterar Senha</a>
+					<a class="dropdown-item" href="{% url 'web:genero_livro' pk=4  %}">Ajuda</a>
+					<a class="dropdown-item" href="{% url 'web:genero_livro' pk=5  %}">Configurações</a>
 				</div>
-				 end #sidebar-->
-				<div style="clear: both;">&nbsp;</div>
-			</div>
+			</li>
+			<a class="nav-link" href="" data-toggle="tooltip" title="Clique para logout"> </a>
+			{% else %}
+
+			<li class="nav-item mr-4">
+				<a class="nav-link" href="{% url 'web:signup' %}" data-toggle="tooltip" title="Clique para logar">Criar Usuario</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="{% url 'login' %}" data-toggle="tooltip" title="Clique para logar">LOGAR</a>
+			</li>
+
+			{% endif %}
+			</li>
+			<form class="form-inline my-2 my-lg-0">
+				<input class="form-control mr-sm-2" type="text" placeholder="Search">
+				<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+			</form>
 		</div>
-	</div> -->
-	<!-- end #page --> 
-</div>
-<div id="footer">
-	<p>&copy; Untitled. All rights reserved. Design by <a href="/" rel="nofollow">TEMPLATED</a>.</p>
-</div>
-<!-- end #footer -->
+	</nav>
+
+	<!--  -->
+	<br>
+
+
+		{% block content %}
+
+		{% endblock %}
+	</div>
+
 </body>
+
 </html>
+
+
+<!-- <a href="{% url 'web:index' %}" class="btn btn-default btn-lg">Inicio</a>
+			<a href=" class="btn btn-default btn-lg">Mais Vendidos</a>
+			<a href="{% url 'web:biblioteca_livro' %}" class="btn btn-default btn-lg">Lançamentos</a>
+			<div class="btn-group">
+				<button type="button" class="btn btn-default dropdown-toggle btn-lg" data-toggle="dropdown">
+					Genero <span class="caret"></span></button>
+				<ul class="dropdown-menu" role="menu">
+					<li><a href="#">Terror</a></li>
+					<li><a href="#">Ramance</a></li>
+				</ul>
+			</div>
+			{% if user.is_authenticated %}
+			<a href="{% url 'web:carrinho_livro' pk=2  %}" class="btn btn-info btn-lg">
+				<span class="glyphicon glyphicon-shopping-cart"></span> Carrinho
+			</a>
+			<a href="{% url 'logout' %}" class="btn btn-default bbtn-lg">
+				<span class="glyphicon glyphicon-log-out"></span> Logout
+			</a>
+			{% else %}
+			<a href="{% url 'login' %}" class="btn btn-default btn-lg">
+				<span class="glyphicon glyphicon-log-in"></span> Login
+			</a>
+			{% endif %}
+
+		</div> -->

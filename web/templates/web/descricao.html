@@ -1,21 +1,28 @@
 {% extends 'web/base.html' %}
 
-
-
 {% block content %}
-    <div id="content">
-        <h1><a href="{% url 'web:descricao' pk=livro.pk   %}">{{ livro.titulo }}</a></h1>
-        <h4>Ano: {{ livro.ano }}</h4>
-        <h3>Genêro: {{ livro.genero}}</h3> </br>
-        <h3> Capa do livro</h3>
-        {% if livro.picture %}
-            <img src = {{ livro.picture.url }} height="200"/>
-        {% endif %}
-        <h6>Autor: {{ livro.autor}}</h6> </br>
-        <h3>Sinopse: {{ livro.sinopse|linebreaksbr }}</h3> </br>
-        
-        <h1><a href="{% url 'web:carrinho_livro' pk=livro.pk   %}">ADIONAR AO CARRINHO</a></h1>
 
+<div class="row justify-content-center">
+    <div class="col-6">
+        <div class="card bg-dark text-white">
+            <div class="card-body">
+                
+                <center><h1><h1>{{ livro.titulo }}</h1></h1></center>
+                <form method="post" novalidate>
+                        <center><td>{% if livro.picture %}<img height="180" src={{ livro.picture.url }} />{% endif %}</center>
 
+                        <p>
+
+                            <h6>Autor: {{ livro.autor}}</h6>
+
+                            <h3>Sinopse: {{ livro.sinopse|linebreaksbr }}</h3> </br>.
+                            <h1><a href="{% url 'web:carrinho_livro' pk=livro.pk   %}">ADIONAR AO CARRINHO</a></h1>
+                            <h3>Apenas R$: {{ livro.valor }}0</h3> </br>.
+                        </p>
+                </form>
+            </div>
+        </div>
     </div>
+</div>
+
 {% endblock %}

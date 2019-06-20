@@ -16,7 +16,11 @@ Including another URLconf
 
 from django.urls import path, include
 from django.contrib import admin
+from django.urls import path, include
 from django.conf.urls.static import static
+from django.views.generic.base import TemplateView
+
+from django.contrib.auth import views
 
 from django.conf import settings
 
@@ -28,5 +32,8 @@ urlpatterns = [
     path('polls', include('library.urls')),
     path('blog', include('blog.urls')),
     path('', include('web.urls' , namespace='web')),
+    # path('accounts/login/', views.LoginView.as_view(), name='login'),
+    # path('accounts/logout/', views.LogoutView.as_view(next_page='/'), name='logout'),
+    path('accounts/', include('django.contrib.auth.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
