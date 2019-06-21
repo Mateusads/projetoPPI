@@ -1,20 +1,50 @@
 {% extends 'web/base.html' %}
 
 {% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-6">
+            <div class="card-deck m-3">
+                {% if livros %}
+                {% for livro in livros %}
 
+                <div class="card-column">
+                    <div class="card bg-dark mb-4" style="max-width: 319px;">
+                        <div class="card-body text-center">
+                            {% if livro.picture %}
+                            <img src={{ livro.picture.url }} height="160" /><br>
+                            {% endif %}
+                            <span class="badge badge-light">{{ livro.titulo | slice:"0:25" }}</span>
+                            <h5>{{ livro.autor }}</h5>
+                            <h6>Vendido: {{ livro.venda }}</h6>
+                            <br>
+                            <h6>{{livro.sinopse | slice:"0:100" }}</h6>
+                            <a href="{% url 'web:descricao' pk=livro.pk  %}" class="btn btn-dark">Ver Mais</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
 
-        <h2>CARRINHO DE COMPRA</h2>
+                {% else %}
+                <div class="container">
+                    <div class="card-deck m-3">
 
-        <form method="POST" class="post-form">{% csrf_token %}
-            {{ form.as_p }}
-            <button type="submit" class="save btn btn-default">Save</button>
-        </form>
+                        <div class="card-column">
+                            <div class="card bg-dark mb-4" style="max-width: 319px;">
+                                <div class="card-body text-center">
 
+                                    <h6>Ainda não há livros no seu carrinho</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
 
-
-
+            </div>
+        </div>
+    </div>
+</div>
 
 
 {% endblock %}
-
-

@@ -55,20 +55,15 @@ class Cliente(models.Model):
     def __str__(self):
         return self.nome
 
-class Rent(models.Model):
-    BOOK_CHOICES = (
-        ('Alugar', 'Alugar'),
-        ('Comprar', 'Comprar'),
-    )
-    tipo = models.CharField(max_length = 50, choices = BOOK_CHOICES)
-    observacao = models.CharField(max_length = 50, default="")
-    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+class Aluguel(models.Model):
+    tipo = models.CharField(max_length = 50, default="Alugado")
+    cliente =  models.ForeignKey('auth.User', on_delete=models.CASCADE)
     livro = models.ForeignKey(Livro, on_delete=models.CASCADE)
-    data_rent = models.DateField()
+    data_aluguel = models.DateField()
     data_devolucao = models.DateField()
 
     def salvar(self):
         self.save()
 
     def __str__(self):
-        return self.tipo
+        return 'Livro : {0}, || Estado : {1}'.format(self.livro, self.tipo)

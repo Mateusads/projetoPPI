@@ -27,73 +27,89 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="container-fluid ml-4">
-		<div class="collapse navbar-collapse" id="navbarColor02">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active">
-					<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-				</li>
+			<div class="collapse navbar-collapse" id="navbarColor02">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'web:mais_vendido' %}">Mais Vendidos</a>
+					</li>
+
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+							Genero
+						</a>
+						<div class="dropdown-menu">
+							<a class="dropdown-item" href="{% url 'web:genero_livro' pk=1  %}">Ação</a>
+							<a class="dropdown-item" href="{% url 'web:genero_livro' pk=2  %}">Aventura</a>
+							<a class="dropdown-item" href="{% url 'web:genero_livro' pk=3  %}">Crônica</a>
+							<a class="dropdown-item" href="{% url 'web:genero_livro' pk=4  %}">Drama</a>
+							<a class="dropdown-item" href="{% url 'web:genero_livro' pk=5  %}">Ficcao</a>
+							<a class="dropdown-item" href="{% url 'web:genero_livro' pk=6  %}">Infantil</a>
+							<a class="dropdown-item" href="{% url 'web:genero_livro' pk=7  %}">Poesia</a>
+							<a class="dropdown-item" href="{% url 'web:genero_livro' pk=8  %}">Romance</a>
+
+						</div>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{% url 'web:contato' %}">Contato</a>
+					</li>
+				</ul>
+				<li class="nav-item my-2 my-lg-0">
+
+					{% if user.is_authenticated %}
+
+
 				<li class="nav-item">
-					<a class="nav-link" href="{% url 'web:mais_vendido' %}">Mais Vendidos</a>
+					
+					<a href="{% url 'web:carrinho' %}"  class="btn btn-dark mr-4">
+						Carrinho <span class="badge badge-light">1</span></a> 
+					</button>
 				</li>
+
 
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-						Genero
+						{{ user.get_username }}
 					</a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="{% url 'web:genero_livro' pk=1  %}">Ação</a>
-						<a class="dropdown-item" href="{% url 'web:genero_livro' pk=2  %}">Aventura</a>
-						<a class="dropdown-item" href="{% url 'web:genero_livro' pk=3  %}">Crônica</a>
-						<a class="dropdown-item" href="{% url 'web:genero_livro' pk=4  %}">Drama</a>
-						<a class="dropdown-item" href="{% url 'web:genero_livro' pk=5  %}">Ficcao</a>
-						<a class="dropdown-item" href="{% url 'web:genero_livro' pk=6  %}">Infantil</a>
-						<a class="dropdown-item" href="{% url 'web:genero_livro' pk=7  %}">Poesia</a>
-						<a class="dropdown-item" href="{% url 'web:genero_livro' pk=8  %}">Romance</a>
-
+						<a class="dropdown-item" href="{% url 'web:perfil' %}">Perfil</a>
+						<a class="dropdown-item" href="{% url 'logout' %}">Encerrar Sessão</a>
+						<a class="dropdown-item" href="{% url 'password_reset' %}">Alterar Senha</a>
+						<a class="dropdown-item" href="{% url 'web:genero_livro' pk=4  %}">Ajuda</a>
+						<a class="dropdown-item" href="{% url 'web:genero_livro' pk=5  %}">Configurações</a>
 					</div>
 				</li>
-			</ul>
-			<li class="nav-item my-2 my-lg-0">
+				<a class="nav-link" href="" data-toggle="tooltip" title="Clique para logout"> </a>
+				{% else %}
 
-				{% if user.is_authenticated %}
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-					{{ user.get_username }}
-				</a>
-				<div class="dropdown-menu">
-					<a class="dropdown-item" href="{% url 'web:genero_livro' pk=1  %}">Perfil</a>
-					<a class="dropdown-item" href="{% url 'logout' %}">Encerrar Sessão</a>
-					<a class="dropdown-item" href="">Alterar Senha</a>
-					<a class="dropdown-item" href="{% url 'web:genero_livro' pk=4  %}">Ajuda</a>
-					<a class="dropdown-item" href="{% url 'web:genero_livro' pk=5  %}">Configurações</a>
-				</div>
-			</li>
-			<a class="nav-link" href="" data-toggle="tooltip" title="Clique para logout"> </a>
-			{% else %}
+				<li class="nav-item mr-4">
+					<a class="nav-link" href="{% url 'web:signup' %}" data-toggle="tooltip"
+						title="Clique para logar">Criar Usuario</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="{% url 'login' %}" data-toggle="tooltip"
+						title="Clique para logar">LOGAR</a>
+				</li>
 
-			<li class="nav-item mr-4">
-				<a class="nav-link" href="{% url 'web:signup' %}" data-toggle="tooltip" title="Clique para logar">Criar Usuario</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="{% url 'login' %}" data-toggle="tooltip" title="Clique para logar">LOGAR</a>
-			</li>
-
-			{% endif %}
-			</li>
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="text" placeholder="Search">
-				<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-			</form>
-		</div>
+				{% endif %}
+				</li>
+				<form class="form-inline my-2 my-lg-0">
+					<input class="form-control mr-sm-2" type="text" placeholder="Search">
+					<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+				</form>
+			</div>
 	</nav>
 
 	<!--  -->
 	<br>
+	
 
 
-		{% block content %}
+	{% block content %}
 
-		{% endblock %}
+	{% endblock %}
 	</div>
 
 </body>
@@ -113,7 +129,7 @@
 				</ul>
 			</div>
 			{% if user.is_authenticated %}
-			<a href="{% url 'web:carrinho_livro' pk=2  %}" class="btn btn-info btn-lg">
+			<a href=" class="btn btn-info btn-lg">
 				<span class="glyphicon glyphicon-shopping-cart"></span> Carrinho
 			</a>
 			<a href="{% url 'logout' %}" class="btn btn-default bbtn-lg">
