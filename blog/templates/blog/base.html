@@ -1,73 +1,83 @@
 {% load static %}
 
-<!DOCTYPE HTML><html lang=”pt-br”>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-<meta name="keywords" content="" />
-<meta name="description" content="" />
-<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-<title>WEB LIBRARY</title>
-<link href="http://fonts.googleapis.com/css?family=Abel" rel="stylesheet" type="text/css" />
-<link href="style.css" rel="stylesheet" type="text/css" media="screen" />
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-<link rel="stylesheet" href="{% static 'css/gallery.css' %}">
-<style type="text/css">
-/* @import "gallery.css"; */
+	<title>Web Library</title>
 
-
-</style>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+	<script src="{% static 'js/global.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+	<link rel="stylesheet" href="{% static 'css/gallery.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min' %}">
 </head>
-<body>
-<div id="wrapper">
-	<div id="header">
-		<div id="logo">
-			<h1><a href="#">WEB LIBRARY BLOG</a></h1>
-		</div>
-	</div>
-	<!-- end #header -->
-	<div id="menu">
-		<ul>
-			<li class="current_page_item">
-				<a href="{% url 'blog:post_list' %}">Inicio</a></li>			
-			{% if user.is_authenticated %}
-			<li><a href="{% url 'blog:post_new' %}"> Novo Post</a></li>
-            <li><a href="{% url 'blog:post_list' %}">Editar</a></li> 
-            {% endif %}  
-			<li><a href="{% url 'blog:contato' %}">Contato</a></li>
-		</ul>
-	</div>
-    <!-- end #menu -->
-    
-	{% block content %}
-	
-    {% endblock %}
 
-				<!-- <div id="sidebar">
-					<ul>
-						<li>
-							<h2>Blogroll</h2>
-							<ul>
-								<li><a href="#">Aliquam libero</a></li>
-								<li><a href="#">Consectetuer adipiscing elit</a></li>
-								<li><a href="#">Metus aliquam pellentesque</a></li>
-								<li><a href="#">Suspendisse iaculis mauris</a></li>
-								<li><a href="#">Urnanet non molestie semper</a></li>
-								<li><a href="#">Proin gravida orci porttitor</a></li>
-							</ul>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		<img src="https://images.vexels.com/media/users/3/157346/isolated/preview/25829f6b8d6ca72aee817a8448ab7024---cone-de-livro-aberto-plana-by-vexels.png"
+			alt="logo" style="width:40px;">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02"
+			aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="container-fluid ml-4">
+			<div class="collapse navbar-collapse" id="navbarColor02">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="/blog">Home <span class="sr-only">(current)</span></a>
+					</li>
+					<li>
+					<a class="dropdown-item" href="{% url 'blog:post_list' %}">Inicio</a>
+					</li>
+					{% if user.is_authenticated %}
+					
+					<a class="dropdown-item" href="% url 'blog:post_new' %}">Novo Post</a>
+					<a class="dropdown-item" href="{% url 'blog:post_list' %}">Editar</a>
+					{% endif %}
+					<a class="dropdown-item" href="{% url 'blog:contato' %}">Contato</a>
+					<li class="nav-item mr-4">
+							<a class="nav-link" href="{% url 'web:signup' %}" data-toggle="tooltip"
+								title="Clique para logar">Criar Usuario</a>
 						</li>
-					</ul>
-				</div>
-				 end #sidebar-->
-				<div style="clear: both;">&nbsp;</div>
-			</div>
-		</div>
+						<li class="nav-item">
+							<a class="nav-link" href="{% url 'login' %}" data-toggle="tooltip"
+								title="Clique para logar">LOGAR</a>
+						</li>
+
+
+	</nav>
+
+	<!--  -->
+	<br>
+
+	{% block content %}
+
+	{% endblock %}
+
+	</div>
+
+		<div style="clear: both;">&nbsp;</div>
+	</div>
+	</div>
 	</div> -->
-	<!-- end #page --> 
-</div>
-<div id="footer">
-	<p>&copy; Untitled. All rights reserved. Design by <a href="/" rel="nofollow">TEMPLATED</a>.</p>
-</div>
-<!-- end #footer -->
+	<!-- end #page -->
+	</div>
+	<div id="footer">
+		<p>&copy; Untitled. All rights reserved. Design by <a href="/" rel="nofollow">TEMPLATED</a>.</p>
+	</div>
+	<!-- end #footer -->
 </body>
+
 </html>

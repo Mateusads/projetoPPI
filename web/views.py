@@ -87,9 +87,10 @@ def contato(request):
     else:
         email_form = ContatoForm(request.POST)
         if email_form.is_valid():
+            emissor = email_form.cleaned_data['emissor']
             assunto = email_form.cleaned_data['assunto']
             msg = email_form.cleaned_data['msg']
-            emissor = email_form.cleaned_data['emissor']
+
 
             try:
                 send_mail(assunto, msg, emissor, [
