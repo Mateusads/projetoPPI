@@ -7,8 +7,9 @@ from django.contrib.auth.decorators import login_required
 from .forms import AluguelForm, UserRegisterForm, ContatoForm
 from django.contrib.auth.forms import UserCreationForm
 from django.utils import timezone
+from django.db import connection
 
-from .models import Livro, Cliente, Aluguel
+from .models import Livro, Cliente, Aluguel, Carrinho
 
 
 def index(request):
@@ -43,10 +44,10 @@ def genero_livro(request, pk):
     return render(request, 'web/genero.html', {'livros': livros})
 
 
+@login_required
 def carrinho(request):
-    livros = Aluguel.objects.order_by('data_aluguel')
-    livrosDetail = Livro.objects.filter(pk=Aluguel.livro)
-
+    livros = Aluguel.objects.filter(cliente=request.user)
+    livrosDetail = Carrinho.objects.all()
     return render(request, 'web/carrinho.html', {'livrosDetail': livrosDetail, 'livros': livros})
 
 
@@ -55,6 +56,7 @@ def carrinho_livro(request, pk):
     livro = Livro.objects.get(pk=pk)
     cliente = request.user
 
+
     aluguel = Aluguel()
     aluguel.cliente = cliente
     aluguel.livro = livro
@@ -62,8 +64,13 @@ def carrinho_livro(request, pk):
     aluguel.data_devolucao = timezone.now()
     aluguel.save()
 
-    livros = Aluguel.objects.order_by('data_aluguel')
-    livrosDetail = Livro.objects.filter(Livro.id = Aluguel.livro)
+    c = Carrinho(status='Espera')
+    c.save()
+    c.livro.add(livro)
+
+    livros = Aluguel.objects.filter(cliente=request.user)
+    livrosDetail = Carrinho.objects.all()
+    # livrosDetail = Carrinho.objects.prefetch_related('livros').all()
 
     return render(request, 'web/carrinho.html', {'livrosDetail': livrosDetail, 'livros': livros})
 
@@ -80,9 +87,9 @@ def contato(request):
     else:
         email_form = ContatoForm(request.POST)
         if email_form.is_valid():
-            emissor = email_form.cleaned_data['emissor']
             assunto = email_form.cleaned_data['assunto']
             msg = email_form.cleaned_data['msg']
+            emissor = email_form.cleaned_data['emissor']
 
             try:
                 send_mail(assunto, msg, emissor, [

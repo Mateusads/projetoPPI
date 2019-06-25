@@ -6,23 +6,25 @@
         <div class="col-6">
             <div class="card-deck m-3">
                 {% if livros %}
-                {% for livro in livros %}
+                    {% for livro in livros %}
 
-                <div class="card-column">
-                    <div class="card bg-dark mb-4" style="max-width: 319px;">
-                        <div class="card-body text-center">
-                            {% if livro.picture %}
-                            <img src={{ livro.picture.url }} height="160" /><br>
-                            {% endif %}
-                            <span class="badge badge-light">{{ livro.titulo | slice:"0:25" }}</span>
-                            <h5>{{ livro.autor }}</h5>
-                            <h6>Vendido: {{ livro.venda }}</h6>
-                            <br>
-                            <h6>{{livro.sinopse | slice:"0:100" }}</h6>
-                            <a href="{% url 'web:descricao' pk=livro.pk  %}" class="btn btn-dark">Ver Mais</a>
+
+                        <div class="card-column">
+                            <div class="card bg-dark mb-4" style="max-width: 319px;">
+                                <div class="card-body text-center">
+                                    {% if livro_detail.picture %}
+                                    <img src={{ livro.picture.url }} height="160" /><br>
+                                    {% endif %}
+                                    <span class="badge badge-light">{{ livro_detail.titulo | slice:"0:25" }}</span>
+                                    <h5>{{ livro.autor }}</h5>
+                                    <h6>Vendido: {{ livro_detail.venda }}</h6>
+                                    <br>
+                                    <h6>{{livro_detail.sinopse | slice:"0:100" }}</h6>
+                                    <a href="{% url 'web:descricao' pk=livro.pk  %}" class="btn btn-dark">Ver Mais</a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+
                 {% endfor %}
 
                 {% else %}

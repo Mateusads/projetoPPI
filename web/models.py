@@ -1,38 +1,38 @@
 import datetime
 from django.db import models
-from django.utils import  timezone
+from django.utils import timezone
 
 
 # Create your models here.
 class Livro(models.Model):
 
-    titulo = models.CharField(max_length = 50, default="")
+    titulo = models.CharField(max_length=50, default="")
     autor = models.CharField(max_length=50, default="")
     ano = models.DateTimeField('ano de publicacao')
 
     BOOK_CHOICES = (
         ('1', 'Ação'),
         ('2', 'Aventura'),
-        ('3', 'Crônica' ), 
+        ('3', 'Crônica'),
         ('4', 'Drama'),
         ('5', 'Ficcao'),
-        ('6', 'Infantil'),          
-        ('7 ', 'Poesia '),    
-        ('8', 'Romance'),     
+        ('6', 'Infantil'),
+        ('7 ', 'Poesia '),
+        ('8', 'Romance'),
     )
-    genero = models.CharField(max_length = 100, choices = BOOK_CHOICES)
-    
-    sinopse = models.CharField(max_length = 2000)
+    genero = models.CharField(max_length=100, choices=BOOK_CHOICES)
+
+    sinopse = models.CharField(max_length=2000)
     valor = models.FloatField(default=0)
     venda = models.IntegerField(default=0)
-    picture = models.ImageField(upload_to='media/pictures/%Y/%m/%d/',max_length=255, null=True, blank=True)
+    picture = models.ImageField(
+        upload_to='media/pictures/%Y/%m/%d/', max_length=255, null=True, blank=True)
 
     def salvar(self):
         self.save()
 
     def getSinopse(self):
         return self.sinopse
-
 
     def __str__(self):
         return self.titulo
@@ -45,7 +45,6 @@ class Cliente(models.Model):
     cpf = models.CharField(max_length=50)
     email = models.EmailField(blank=True, default="")
 
-
     def salvar(self):
         self.save()
 
@@ -55,9 +54,10 @@ class Cliente(models.Model):
     def __str__(self):
         return self.nome
 
+
 class Aluguel(models.Model):
-    tipo = models.CharField(max_length = 50, default="Alugado")
-    cliente =  models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    tipo = models.CharField(max_length=50, default="Alugado")
+    cliente = models.ForeignKey('auth.User', on_delete=models.CASCADE)
     livro = models.ForeignKey(Livro, on_delete=models.CASCADE)
     data_aluguel = models.DateField()
     data_devolucao = models.DateField()
@@ -67,3 +67,14 @@ class Aluguel(models.Model):
 
     def __str__(self):
         return 'Livro : {0}, || Estado : {1}'.format(self.livro, self.tipo)
+
+
+class Carrinho(models.Model):
+    status = models.CharField(max_length=50, default="Espera")
+    livro = models.ManyToManyField(Livro, related_name="livros")
+
+    def salvar(self):
+        self.save()
+
+    def __str__(self):
+        return 'Livro : {0}, || Status : {1}'.format(self.livro, self.status)

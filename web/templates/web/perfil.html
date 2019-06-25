@@ -7,7 +7,10 @@
         <div class="card bg-dark text-white">
             <div class="card-body">
                 
-                <center><h1><h1>{{ user.get_username }}</h1></h1>
+                <center>
+                    <h1>Username: {{ cliente.get_username }}</h1>
+                    <h1>Nome: {{ cliente.nome }} {{ cliente.sobrenome }}</h1>
+                    <h1>Email: {{ cliente.email }}</h1>
                 <form method="post" novalidate>
                     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9B5mSA3KFfeHEFlK0nL3EFAaAfyOMBCqlAKml1zU5eAzlebpJ" class="rounded" alt="Cinque Terre"> 
                     

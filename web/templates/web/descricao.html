@@ -16,10 +16,12 @@
                             <h6>Autor: {{ livro.autor}}</h6>
 
                             <h3>Sinopse: {{ livro.sinopse|linebreaksbr }}</h3> </br>.
-                            <h1><a href="{% url 'web:carrinho_livro' pk=livro.pk   %}">ADIONAR AO CARRINHO</a></h1>
+
                             <h3>Apenas R$: {{ livro.valor }}0</h3> </br>.
+                            
                         </p>
                 </form>
+                <button id="buttondesc" href="/">ADIONAR AO CARRINHO  </button>
             </div>
         </div>
     </div>
