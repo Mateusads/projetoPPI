@@ -17,5 +17,6 @@ urlpatterns = [
     path('contato/', views.contato, name='contato'),
     path('contato/obg', views.obg, name='obg'),
     path('accounts/perfil', views.perfil, name='perfil'),
+    path('search/', views.search, name='search'),
 
 ]

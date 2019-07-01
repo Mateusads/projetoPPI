@@ -1,7 +1,25 @@
 {% extends 'web/base.html' %}
 
+
+
 {% block content %}
 <div class="container">
+    {% if messages %}
+
+    {% for message in messages %}
+      <div class="alert {{ message.tags }} alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{ message }}
+      </div>
+    {% endfor %}    
+    {% endif %}
+
+
+
+
+
   <div class="card-deck m-3">
     {% for livro in livros %}
     <div class="card-column">
@@ -13,15 +31,28 @@
           <span class="badge badge-light">{{ livro.titulo | slice:"0:25" }}</span>
           <h5>{{ livro.autor }}</h5>
           <br>
-            <h6>{{livro.sinopse | slice:"0:100" }}</h6>
+          <h6>{{livro.sinopse | slice:"0:100" }}</h6>
           <a href="{% url 'web:descricao' pk=livro.pk  %}" class="btn btn-dark">Ver Mais</a>
         </div>
       </div>
     </div>
     {% endfor %}
-    
+
   </div>
 </div>
 
 
+{% endblock %}
+
+
+{% block contentF %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <li class="nav-item">
+    <a class="nav-link" href="/blog" data-toggle="tooltip" title="Clique para logar">
+      <h3>Venha conhecer e interagir com
+        nosso Blog... </h3>
+    </a>
+  </li>
+
+</nav>
 {% endblock %}

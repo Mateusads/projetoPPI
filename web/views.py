@@ -8,13 +8,17 @@ from .forms import AluguelForm, UserRegisterForm, ContatoForm
 from django.contrib.auth.forms import UserCreationForm
 from django.utils import timezone
 from django.db import connection
+from django.contrib import messages
+from django.core import serializers
+import json
 
 from .models import Livro, Cliente, Aluguel, Carrinho
 
 
 def index(request):
+    message = messages.get_messages(request)
     livros = Livro.objects.order_by('titulo')
-    return render(request, 'web/index.html', {'livros': livros})
+    return render(request, 'web/index.html', {'livros': livros, "message":message})
 
 
 def mais_vendido(request):
@@ -56,7 +60,6 @@ def carrinho_livro(request, pk):
     livro = Livro.objects.get(pk=pk)
     cliente = request.user
 
-
     aluguel = Aluguel()
     aluguel.cliente = cliente
     aluguel.livro = livro
@@ -91,10 +94,11 @@ def contato(request):
             assunto = email_form.cleaned_data['assunto']
             msg = email_form.cleaned_data['msg']
 
-
             try:
-                send_mail(assunto, msg, emissor, [
-                          'mateusowmedeiros@gmail.com'])
+
+                messages.success(request, 'Mensagem enviada com Sucesso!!!', extra_tags='alert')
+                # send_mail(assunto, msg, emissor, [
+                #           'mateusowmedeiros@gmail.com'])
             except BadHeaderError:
                 return HttpResponse("Erro =/")
             return redirect('/')
@@ -111,17 +115,15 @@ class SignUp(generic.CreateView):
     template_name = 'registration/signup.html'
 
 
-# @login_required
-# def compra(request, pkLivro, pkCliente):
-#     cliente = get_object_or_404(Cliente, pkCliente =pk)
-#     livro = get_object_or_404(Livro, pkLivro = pk)
 
-#     rent = form.save(commit=False)
-#     rent.cliente = cliente
-#     rent.livro = livro
-#     rent.data_rent = published_date__lte = timezone.now()
-#     rent.data_devolucao = published_date__lte = timezone.now()
-#     rent.save()
-#     return render(request, 'web/index.html')
+def search(request):
+    titulo = request.GET.get('titulo')
+    livros = Livro.objects.filter(titulo=titulo)    
+    livros = [ livro_serializer(livro) for livro in livros ]
 
-#     return render(request, 'web/carrinho.html', {'cliente': cliente, 'livro': livro})
+
+    return HttpResponse(json.dumps(livros), content_type='application/json' )
+
+
+def livro_serializer(livro):
+    return {'id': livro.id, 'titulo': livro.titulo, 'description': livro.descricao}

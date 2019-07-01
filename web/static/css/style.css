@@ -368,7 +368,7 @@ a:hover {
 	height: 50px;
 	margin: 0 auto;
 	padding: 0px 0 15px 0;
-	border-top: 1px solid #292929;
+	border-top: 1px solid #e05200;
 }
 
 #footer p {
@@ -377,7 +377,7 @@ a:hover {
 	line-height: normal;
 	text-transform: uppercase;
 	text-align: center;
-	color: #444444;
+	color: #e05200;
 }
 
 #footer a {
