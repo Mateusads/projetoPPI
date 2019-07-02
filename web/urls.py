@@ -18,5 +18,6 @@ urlpatterns = [
     path('contato/obg', views.obg, name='obg'),
     path('accounts/perfil', views.perfil, name='perfil'),
     path('search/', views.search, name='search'),
+    path('insrating/<int:pk>/<int:rating>', views.insrating, name='insrating'),
 
 ]

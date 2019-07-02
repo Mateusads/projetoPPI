@@ -5,11 +5,33 @@
 <div class="row justify-content-center">
     <div class="col-6">
         <div class="card bg-dark text-white">
+
+            <div class="stars">
+                <form action="POST">
+                    <input type='hidden' id='pk' value="{{ livro.pk }}" />
+                    <input class="star star-5" id="star-5" type="radio" name="star" value="1" />
+                    <label class="star star-5" id="star-label-5" for="star-5"></label>
+
+                    <br>
+                    <div class="card bg-dark mb-4" id=rating>
+                        <div class="info">
+                            <h>Avaliações positivas {{ livro.rating }}</h5>
+                        </div>
+                    </div>
+                    
+                </form>
+
+            </div>
             <div class="card-body">
-                <div class="card-js"
-                <center><h1><h1>{{ livro.titulo }}</h1></h1></center>
-                <form method="post" novalidate>
-                        <center><td>{% if livro.picture %}<img height="180" src={{ livro.picture.url }} />{% endif %}</center>
+                <div class="card-js" <center>
+                    <h1>
+                        <h1>{{ livro.titulo }}</h1>
+                    </h1>
+                    </center>
+                    <form method="post" novalidate>
+                        <center>
+                            <td>{% if livro.picture %}<img height="180" src={{ livro.picture.url }} />{% endif %}
+                        </center>
 
                         <p>
 
@@ -18,10 +40,10 @@
                             <h3>Sinopse: {{ livro.sinopse|linebreaksbr }}</h3> </br>.
 
                             <h3>Apenas R$: {{ livro.valor }}0</h3> </br>.
-                            
+
                         </p>
-                </form>
-                <button id="buttondesc" href="/">ADIONAR AO CARRINHO  </button>
+                    </form>
+                    <button id="buttondesc" href="/">ADIONAR AO CARRINHO </button>
                 </div>
             </div>
         </div>

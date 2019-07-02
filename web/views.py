@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse, reverse_lazy
 from django.views import generic
@@ -68,6 +68,7 @@ def carrinho_livro(request, pk):
     aluguel.save()
 
     c = Carrinho(status='Espera')
+    messages.success(request, 'Mensagem enviada com Sucesso!!!', extra_tags='alert')
     c.save()
     c.livro.add(livro)
 
@@ -106,6 +107,7 @@ def contato(request):
 
 
 def obg(request):
+    messages.success('sucesso!!!', extra_tags='alert')
     return HttpResponse("<h2>Obrigado pela mensagem!!!</h2>")
 
 
@@ -126,4 +128,24 @@ def search(request):
 
 
 def livro_serializer(livro):
+
     return {'id': livro.id, 'titulo': livro.titulo, 'description': livro.descricao}
+
+
+def insrating(request, pk, rating):
+
+    try:
+        livro = get_object_or_404(Livro, pk=pk)
+        livro.rating += 1
+        messages.success(request, 'Avaliação salva com sucesso!!!', extra_tags='alert')
+        livro.save()
+        data = {
+            'rating': livro.rating,
+            'status': 1
+		}
+    except:
+        data = {
+            'status': 0
+    }
+    
+    return JsonResponse(data)

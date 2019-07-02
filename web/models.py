@@ -9,6 +9,7 @@ class Livro(models.Model):
     titulo = models.CharField(max_length=50, default="")
     autor = models.CharField(max_length=50, default="")
     ano = models.DateTimeField('ano de publicacao')
+    rating = models.IntegerField(default=0)
 
     BOOK_CHOICES = (
         ('1', 'Ação'),
